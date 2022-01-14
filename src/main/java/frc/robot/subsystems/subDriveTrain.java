@@ -99,7 +99,8 @@ public class subDriveTrain extends SubsystemBase {
 
   public void stopDrive() {
     driveMode = "TeleOp";
-    driveTrain.tankDrive(0, 0);
+    leftDriveMaster.stopMotor();
+    rightDriveMaster.stopMotor();
   }
 
   public void DriveLock() {
