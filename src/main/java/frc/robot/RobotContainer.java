@@ -7,7 +7,9 @@ import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.commands.Autonomous_MoveForSeconds;
 import frc.robot.commands.Autonomous_MoveToEncoderValue;
+import frc.robot.commands.Autonomous_Turn90Degrees;
 import frc.robot.commands.cmdDriveTrain_HoldGround;
+import frc.robot.commands.cmdDriveTrain_ResetEncoders;
 import frc.robot.subsystems.subDriveTrain;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.RunCommand;
@@ -31,7 +33,8 @@ public class RobotContainer {
 
   private void AddAutoCommands(){
     autoChooser.setDefaultOption("Move For Seconds", new Autonomous_MoveForSeconds(drive, 4, 0.4));  
-    autoChooser.addOption("Move To Encoder Value", new Autonomous_MoveToEncoderValue(drive, 10)); 
+    autoChooser.addOption("Move To Encoder Value", new Autonomous_MoveToEncoderValue(drive, 100)); 
+    autoChooser.addOption("Turn 90 Degrees", new Autonomous_Turn90Degrees(drive));
     SmartDashboard.putData("Autonomous", autoChooser);
   }
 
@@ -40,6 +43,7 @@ public class RobotContainer {
     drive.setDefaultCommand(new RunCommand(() -> drive.tankDrive(driverOne), drive));
 
     new JoystickButton(driverOne, Button.kB.value).whileHeld(new cmdDriveTrain_HoldGround(drive));
+    new JoystickButton(driverOne, Button.kA.value).whenPressed(new cmdDriveTrain_ResetEncoders(drive));
   } 
 
   public Command getAutonomousCommand() {

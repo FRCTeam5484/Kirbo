@@ -29,6 +29,7 @@ public class Autonomous_MoveForSeconds extends CommandBase {
   @Override
   public void execute() {
     drive.SimpleMove(Speed);
+    System.out.println("Auto: Move Sec " + Speed);
   }
 
   @Override

@@ -73,8 +73,8 @@ public class subDriveTrain extends SubsystemBase {
     kD = 1;
     kIz = 0;
     kFF = .1;
-    kMaxOutput = .5;
-    kMinOutput = -.5;
+    kMaxOutput = .3;
+    kMinOutput = -.3;
 
     leftPIDController.setP(kP);
     leftPIDController.setI(kI);
@@ -123,6 +123,11 @@ public class subDriveTrain extends SubsystemBase {
     driveMode = "TeleOp";
     driveTrain.tankDrive(-driver.getLeftY() * DriveSystem.ManualMaxSpeed, driver.getRightY() * DriveSystem.ManualMaxSpeed);
     driveTrain.setDeadband(0.08);
+  }
+
+  public void arcadeDrive() {
+    driveMode = "Autonomous";
+    driveTrain.arcadeDrive(1, 1);
   }
 
   public void ResetEncoders(){
