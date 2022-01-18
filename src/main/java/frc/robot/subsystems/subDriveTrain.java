@@ -152,6 +152,11 @@ public class subDriveTrain extends SubsystemBase {
 
   public void GyroDriveStraight(double speed){
     double error = -gyro.getRate();
-    driveTrain.tankDrive(.5 + kP * error, .5 - kP * error);
+    driveTrain.tankDrive(.5 + 1 * error, .5 - 1 * error);
+  }
+
+  public void GyroTurnToAngle(double angle){
+    double error = angle - gyro.getAngle();
+    driveTrain.tankDrive(1 * error, 1 * error);
   }
 }
