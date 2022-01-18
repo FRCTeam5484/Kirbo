@@ -32,6 +32,6 @@ public class Autonomous_Turn90Degrees extends CommandBase {
 
   @Override
   public boolean isFinished() {
-    return time.get()>1 ? true : false;
+    return time.get()> 1 ? true : false;
   }
 }

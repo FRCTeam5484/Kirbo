@@ -1,4 +1,4 @@
-package frc.helpers;
+package frc.robot.helpers;
 
 import edu.wpi.first.wpilibj.ADXRS450_Gyro;
 
