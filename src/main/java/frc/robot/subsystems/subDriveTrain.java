@@ -6,6 +6,7 @@ import com.revrobotics.SparkMaxPIDController;
 import com.revrobotics.CANSparkMax.IdleMode;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 import frc.robot.Constants.DriveSystem;
+import edu.wpi.first.wpilibj.ADXRS450_Gyro;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
@@ -27,6 +28,8 @@ public class subDriveTrain extends SubsystemBase {
   public RelativeEncoder right1Encoder = rightDriveMaster.getEncoder();
   public RelativeEncoder right2Encoder = rightDriveSlave.getEncoder();
   public String driveMode = "TeleOp";
+
+  public ADXRS450_Gyro gyro = new ADXRS450_Gyro();
   
   public subDriveTrain() {
     SetMotorSettings();
@@ -145,5 +148,10 @@ public class subDriveTrain extends SubsystemBase {
 
   public void SimpleMove(double speed){
     driveTrain.tankDrive(speed, -speed);
+  }
+
+  public void GyroDriveStraight(double speed){
+    double error = -gyro.getRate();
+    driveTrain.tankDrive(.5 + kP * error, .5 - kP * error);
   }
 }
