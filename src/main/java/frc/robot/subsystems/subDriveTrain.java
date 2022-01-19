@@ -38,7 +38,9 @@ public class subDriveTrain extends SubsystemBase {
   }
 
   @Override
-  public void periodic() {}
+  public void periodic() {
+    System.out.println(gyro.get2D());
+  }
 
   private void SetMotorSettings() {
     leftDriveMaster.restoreFactoryDefaults();
@@ -131,7 +133,7 @@ public class subDriveTrain extends SubsystemBase {
 
   public void arcadeDrive() {
     driveMode = "Autonomous";
-    driveTrain.arcadeDrive(1, 1);
+    driveTrain.arcadeDrive(.5, .9);
   }
 
   public void ResetEncoders(){
@@ -142,21 +144,25 @@ public class subDriveTrain extends SubsystemBase {
   }
 
   public void DriveStraightUsingEncoders(){
+    driveMode = "Autonomous";
     double error = left1Encoder.getPosition() - right1Encoder.getPosition();
     double turnPower = .04 * -error;
     driveTrain.arcadeDrive(DriveSystem.AutoMaxSpeed, turnPower, false);
   }
 
   public void SimpleMove(double speed){
+    driveMode = "Autonomous";
     driveTrain.tankDrive(speed, -speed);
   }
 
   public void GyroDriveStraight(double speed){
+    driveMode = "Autonomous";
     double error = -gyro.getRawRate();
     driveTrain.tankDrive(.5 + 1 * error, .5 - 1 * error);
   }
 
   public void GyroTurnToAngle(double angle){
+    driveMode = "Autonomous";
     double error = angle - gyro.getRawAngle();
     driveTrain.tankDrive(1 * error, 1 * error);
   }

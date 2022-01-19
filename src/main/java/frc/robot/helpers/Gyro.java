@@ -11,6 +11,9 @@ public class Gyro
 		g.calibrate();
 	}
 
+	public double get2D(){
+		return g.getRotation2d().getDegrees();
+	}
 	/**
 	 * 
 	 * @return angle 0-359 degrees

@@ -1,28 +1,29 @@
 package frc.robot.commands;
 
-import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj2.command.CommandBase;
+import frc.robot.helpers.Gyro;
 import frc.robot.subsystems.subDriveTrain;
 
-public class Autonomous_Turn90Degrees extends CommandBase {
+public class Autonomous_GyroAngle extends CommandBase {
   subDriveTrain drive;
-  Timer time;
-  
+  double angle;
+  Gyro gyro;
 
-  public Autonomous_Turn90Degrees(subDriveTrain _drive) {
+  public Autonomous_GyroAngle(subDriveTrain _drive, double _angle) {
     drive = _drive;
+    angle = _angle;
     addRequirements(drive);
   }
 
   @Override
   public void initialize() {
-    time = new Timer();
-    time.start();
+    gyro = new Gyro();
+    gyro.reset();
   }
 
   @Override
   public void execute() {
-    drive.arcadeDrive();
+    drive.GyroTurnToAngle(angle);
   }
 
   @Override
@@ -32,6 +33,6 @@ public class Autonomous_Turn90Degrees extends CommandBase {
 
   @Override
   public boolean isFinished() {
-    return time.get()> 1.5 ? true : false;
+    return angle > gyro.getRawAngle() ? true: false;
   }
 }

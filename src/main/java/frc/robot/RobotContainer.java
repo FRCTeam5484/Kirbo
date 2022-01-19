@@ -5,6 +5,7 @@ import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.XboxController.Button;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import frc.robot.commands.Autonomous_GyroAngle;
 import frc.robot.commands.Autonomous_MoveForSeconds;
 import frc.robot.commands.Autonomous_MoveToEncoderValue;
 import frc.robot.commands.Autonomous_Turn90Degrees;
@@ -35,12 +36,14 @@ public class RobotContainer {
     autoChooser.setDefaultOption("Move For Seconds", new Autonomous_MoveForSeconds(drive, 4, 0.4));  
     autoChooser.addOption("Move To Encoder Value", new Autonomous_MoveToEncoderValue(drive, 100)); 
     autoChooser.addOption("Turn 90 Degrees", new Autonomous_Turn90Degrees(drive));
+    autoChooser.addOption("Gyro Turn to angle", new Autonomous_GyroAngle(drive, 60));
     SmartDashboard.putData("Autonomous", autoChooser);
   }
 
   private void DriverOneFunctions() {    
     // Default Commands
     drive.setDefaultCommand(new RunCommand(() -> drive.tankDrive(driverOne), drive));
+    System.out.println("Driver Default Drive");
 
     new JoystickButton(driverOne, Button.kB.value).whileHeld(new cmdDriveTrain_HoldGround(drive));
     new JoystickButton(driverOne, Button.kA.value).whenPressed(new cmdDriveTrain_ResetEncoders(drive));
