@@ -14,6 +14,7 @@ public class Autonomous_MoveToEncoderTargetPID extends PIDCommand {
       targetEncoderValue,
       output -> drive.arcadeDrive(output, 0),
       drive);
+      drive.ResetEncoders();
   }
 
   @Override
