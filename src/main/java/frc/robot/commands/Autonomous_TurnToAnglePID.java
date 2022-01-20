@@ -13,6 +13,7 @@ public class Autonomous_TurnToAnglePID extends PIDCommand {
       targetAngleDegrees,
       output -> drive.arcadeDrive(0, output),
       drive);
+    drive.gyro.zeroHeading();
   }
 
   @Override
