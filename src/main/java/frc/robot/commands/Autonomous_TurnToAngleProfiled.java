@@ -20,7 +20,7 @@ public class Autonomous_TurnToAngleProfiled extends ProfiledPIDCommand {
         targetAngleDegrees,
         (output, setpoint) -> drive.arcadeDrive(0, output),
         drive);
-    drive.ResetEncoders();
+    drive.gyro.zeroHeading();
     getController().enableContinuousInput(-180, 180);
     getController().setTolerance(DriveSystem.TurnToleranceDeg, DriveSystem.TurnRateToleranceDegPerSec);
   }
