@@ -1,7 +1,3 @@
-// Copyright (c) FIRST and other WPILib contributors.
-// Open Source Software; you can modify and/or share it under the terms of
-// the WPILib BSD license file in the root directory of this project.
-
 package frc.robot;
 
 import edu.wpi.first.wpilibj.TimedRobot;
@@ -31,9 +27,9 @@ public class Robot extends TimedRobot {
     SmartDashboard.putNumber("Drive Right Power", m_robotContainer.drive.rightDriveMaster.get());
     SmartDashboard.putNumber("Drive Left Encoder", m_robotContainer.drive.left1Encoder.getPosition());
     SmartDashboard.putNumber("Drive Right Encoder", m_robotContainer.drive.right1Encoder.getPosition());   
-    SmartDashboard.putNumber("Gyro Raw Angle", m_robotContainer.drive.gyro.getRawAngle());
-    SmartDashboard.putNumber("Gyro Raw Rate", m_robotContainer.drive.gyro.getRawRate());
-    SmartDashboard.putNumber("Gyro Calculated Angle", m_robotContainer.drive.gyro.get());
+    SmartDashboard.putNumber("Gyro Heading", m_robotContainer.drive.NavX_getHeading());
+    SmartDashboard.putNumber("Gyro Angle", m_robotContainer.drive.NavX_getAngle());
+    SmartDashboard.putNumber("Gyro Rate", m_robotContainer.drive.NavX_getRate());
   }
 
   @Override

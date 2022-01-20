@@ -16,6 +16,7 @@ import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.RunCommand;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 
+
 public class RobotContainer {
   SendableChooser<Command> autoChooser = new SendableChooser<>();
 
@@ -29,25 +30,26 @@ public class RobotContainer {
 
   public RobotContainer() {
     AddAutoCommands();
-    DriverOneFunctions(); 
+    DriverOneFunctions();
   }
 
-  private void AddAutoCommands(){
-    autoChooser.setDefaultOption("Move For Seconds", new Autonomous_MoveForSeconds(drive, 4, 0.4));  
-    autoChooser.addOption("Move To Encoder Value", new Autonomous_MoveToEncoderValue(drive, 100)); 
+  private void AddAutoCommands() {
+    autoChooser.setDefaultOption("Move For Seconds", new Autonomous_MoveForSeconds(drive, 4, 0.4));
+    autoChooser.addOption("Move To Encoder Value", new Autonomous_MoveToEncoderValue(drive, 100));
     autoChooser.addOption("Turn 90 Degrees", new Autonomous_Turn90Degrees(drive));
     autoChooser.addOption("Gyro Turn to angle", new Autonomous_GyroAngle(drive, 60));
     SmartDashboard.putData("Autonomous", autoChooser);
   }
 
-  private void DriverOneFunctions() {    
+  private void DriverOneFunctions() {
     // Default Commands
     drive.setDefaultCommand(new RunCommand(() -> drive.tankDrive(driverOne), drive));
     System.out.println("Driver Default Drive");
 
     new JoystickButton(driverOne, Button.kB.value).whileHeld(new cmdDriveTrain_HoldGround(drive));
     new JoystickButton(driverOne, Button.kA.value).whenPressed(new cmdDriveTrain_ResetEncoders(drive));
-  } 
+    //new JoystickButton(driverOne, Button.kX.value).whenPressed(new cmdNavX_ZeroHeading(navx));
+  }
 
   public Command getAutonomousCommand() {
     return autoChooser.getSelected();

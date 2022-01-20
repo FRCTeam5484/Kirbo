@@ -1,5 +1,6 @@
 package frc.robot.subsystems;
 
+import com.kauailabs.navx.frc.AHRS;
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.RelativeEncoder;
 import com.revrobotics.SparkMaxPIDController;
@@ -7,11 +8,11 @@ import com.revrobotics.CANSparkMax.IdleMode;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 
 import frc.robot.Constants.DriveSystem;
-import frc.robot.helpers.Gyro;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
+import edu.wpi.first.wpilibj.SPI;
 
 public class subDriveTrain extends SubsystemBase {
   public CANSparkMax leftDriveMaster = new CANSparkMax(DriveSystem.LeftMasterMotorId, MotorType.kBrushless);
@@ -30,17 +31,19 @@ public class subDriveTrain extends SubsystemBase {
   public RelativeEncoder right2Encoder = rightDriveSlave.getEncoder();
   public String driveMode = "TeleOp";
 
-  public Gyro gyro = new Gyro();
+  public AHRS ahrs;
   
   public subDriveTrain() {
     SetMotorSettings();
     SetPIDSettings();
+
+    ahrs = new AHRS(SPI.Port.kMXP);
+		ahrs.calibrate();
+		ahrs.reset();
   }
 
   @Override
-  public void periodic() {
-    System.out.println(gyro.get2D());
-  }
+  public void periodic() {  }
 
   private void SetMotorSettings() {
     leftDriveMaster.restoreFactoryDefaults();
@@ -157,13 +160,40 @@ public class subDriveTrain extends SubsystemBase {
 
   public void GyroDriveStraight(double speed){
     driveMode = "Autonomous";
-    double error = -gyro.getRawRate();
-    driveTrain.tankDrive(.5 + 1 * error, .5 - 1 * error);
+    //double error = -riogyro.getTurnRate();
+    //driveTrain.tankDrive(.5 + 1 * error, .5 - 1 * error);
   }
 
-  public void GyroTurnToAngle(double angle){
+  public void GyroTurnTowardsAngle(double angle){
     driveMode = "Autonomous";
-    double error = angle - gyro.getRawAngle();
-    driveTrain.tankDrive(1 * error, 1 * error);
+    if(angle > 0) {
+      double error = angle - NavX_getHeading();
+      driveTrain.tankDrive(1 * error, 1 * error);
+    }
+    else {
+      double error = Math.abs(angle) - NavX_getHeading();
+      driveTrain.tankDrive(-1 * error, -1 * error);
+    }
   }
+
+  //NAVX
+  public boolean NavX_isConnected(){
+    return ahrs.isConnected();
+  }
+  
+  public void NavX_zeroHeading() {
+		ahrs.zeroYaw();
+	}
+
+	public double NavX_getHeading() {
+		return Math.IEEEremainder(ahrs.getAngle(), 360);
+	}
+
+  public double NavX_getAngle() {
+    return ahrs.getAngle();
+  }
+
+	public double NavX_getRate() {
+		return ahrs.getRate();
+	}
 }

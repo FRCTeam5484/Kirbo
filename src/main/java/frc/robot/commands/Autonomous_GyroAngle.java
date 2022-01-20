@@ -1,13 +1,11 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
-import frc.robot.helpers.Gyro;
 import frc.robot.subsystems.subDriveTrain;
 
 public class Autonomous_GyroAngle extends CommandBase {
   subDriveTrain drive;
   double angle;
-  Gyro gyro;
 
   public Autonomous_GyroAngle(subDriveTrain _drive, double _angle) {
     drive = _drive;
@@ -17,13 +15,12 @@ public class Autonomous_GyroAngle extends CommandBase {
 
   @Override
   public void initialize() {
-    gyro = new Gyro();
-    gyro.reset();
+    drive.NavX_zeroHeading();
   }
 
   @Override
   public void execute() {
-    drive.GyroTurnToAngle(angle);
+    drive.GyroTurnTowardsAngle(angle);
   }
 
   @Override
@@ -33,6 +30,11 @@ public class Autonomous_GyroAngle extends CommandBase {
 
   @Override
   public boolean isFinished() {
-    return angle > gyro.getRawAngle() ? true: false;
+    if(angle > 0) {
+      return angle < drive.NavX_getHeading() ? true: false;
+    }
+    else{
+      return angle > drive.NavX_getHeading() ? true: false;
+    }
   }
 }

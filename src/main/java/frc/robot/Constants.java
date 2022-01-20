@@ -1,7 +1,7 @@
 package frc.robot;
 
 public final class Constants {
-    private final static class HardwareId{
+    public final static class HardwareId{
         // Controllers
         private final static int DriverOneId = 0;
         private final static int DriverTwoId = 1;
