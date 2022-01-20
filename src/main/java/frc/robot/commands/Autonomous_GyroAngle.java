@@ -15,7 +15,7 @@ public class Autonomous_GyroAngle extends CommandBase {
 
   @Override
   public void initialize() {
-    drive.NavX_zeroHeading();
+    drive.gyro.zeroHeading();
   }
 
   @Override
@@ -31,10 +31,10 @@ public class Autonomous_GyroAngle extends CommandBase {
   @Override
   public boolean isFinished() {
     if(angle > 0) {
-      return angle < drive.NavX_getHeading() ? true: false;
+      return angle < drive.gyro.getHeading() ? true: false;
     }
     else{
-      return angle > drive.NavX_getHeading() ? true: false;
+      return angle > drive.gyro.getHeading() ? true: false;
     }
   }
 }

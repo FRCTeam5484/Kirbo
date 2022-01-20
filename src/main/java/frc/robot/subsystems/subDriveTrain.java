@@ -1,6 +1,6 @@
 package frc.robot.subsystems;
 
-import com.kauailabs.navx.frc.AHRS;
+
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.RelativeEncoder;
 import com.revrobotics.SparkMaxPIDController;
@@ -8,11 +8,12 @@ import com.revrobotics.CANSparkMax.IdleMode;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 
 import frc.robot.Constants.DriveSystem;
+import frc.robot.helpers.Gyro;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
-import edu.wpi.first.wpilibj.SPI;
+
 
 public class subDriveTrain extends SubsystemBase {
   public CANSparkMax leftDriveMaster = new CANSparkMax(DriveSystem.LeftMasterMotorId, MotorType.kBrushless);
@@ -25,21 +26,17 @@ public class subDriveTrain extends SubsystemBase {
   private SparkMaxPIDController rightPIDController;
   public double kP, kI, kD, kIz, kFF, kMaxOutput, kMinOutput;
 
-  public RelativeEncoder left1Encoder = leftDriveMaster.getEncoder();
-  public RelativeEncoder left2Encoder = leftDriveSlave.getEncoder();
-  public RelativeEncoder right1Encoder = rightDriveMaster.getEncoder();
-  public RelativeEncoder right2Encoder = rightDriveSlave.getEncoder();
+  private RelativeEncoder left1Encoder = leftDriveMaster.getEncoder();
+  private RelativeEncoder left2Encoder = leftDriveSlave.getEncoder();
+  private RelativeEncoder right1Encoder = rightDriveMaster.getEncoder();
+  private RelativeEncoder right2Encoder = rightDriveSlave.getEncoder();
   public String driveMode = "TeleOp";
 
-  public AHRS ahrs;
+  public Gyro gyro = new Gyro();
   
   public subDriveTrain() {
     SetMotorSettings();
     SetPIDSettings();
-
-    ahrs = new AHRS(SPI.Port.kMXP);
-		ahrs.calibrate();
-		ahrs.reset();
   }
 
   @Override
@@ -139,6 +136,11 @@ public class subDriveTrain extends SubsystemBase {
     driveTrain.arcadeDrive(.5, .9);
   }
 
+  public void arcadeDrive(double speed, double rotation) {
+    driveMode = "Autonomous";
+    driveTrain.arcadeDrive(speed, rotation);
+  }
+
   public void ResetEncoders(){
     left1Encoder.setPosition(0);
     left2Encoder.setPosition(0);
@@ -167,33 +169,24 @@ public class subDriveTrain extends SubsystemBase {
   public void GyroTurnTowardsAngle(double angle){
     driveMode = "Autonomous";
     if(angle > 0) {
-      double error = angle - NavX_getHeading();
+      double error = angle - gyro.getHeading();
       driveTrain.tankDrive(1 * error, 1 * error);
     }
     else {
-      double error = Math.abs(angle) - NavX_getHeading();
+      double error = Math.abs(angle) - gyro.getHeading();
       driveTrain.tankDrive(-1 * error, -1 * error);
     }
   }
 
-  //NAVX
-  public boolean NavX_isConnected(){
-    return ahrs.isConnected();
-  }
-  
-  public void NavX_zeroHeading() {
-		ahrs.zeroYaw();
-	}
-
-	public double NavX_getHeading() {
-		return Math.IEEEremainder(ahrs.getAngle(), 360);
-	}
-
-  public double NavX_getAngle() {
-    return ahrs.getAngle();
+  public double getLeftSideEncoderValue(){
+    return Math.abs(left1Encoder.getPosition());
   }
 
-	public double NavX_getRate() {
-		return ahrs.getRate();
-	}
+  public double getRightSideEncoderValue(){
+    return Math.abs(right1Encoder.getPosition());
+  }
+
+  public double getAverageEncoderDistance(){
+    return (getLeftSideEncoderValue() + getRightSideEncoderValue()) / 2.0;
+  }
 }

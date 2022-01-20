@@ -33,5 +33,14 @@ public final class Constants {
         // Speed
         public final static double ManualMaxSpeed = 0.7;
         public final static double AutoMaxSpeed = 0.3;
+        // PID Turn Values
+        public static final double TurnP = 1;
+        public static final double TurnI = 0;
+        public static final double TurnD = 0;
+        public static final double MaxTurnRateDegPerS = 100;
+        public static final double MaxTurnAccelerationDegPerSSquared = 300;
+        public static final double TurnToleranceDeg = 5;
+        public static final double TurnRateToleranceDegPerS = 10;
+        public static final boolean GyroReversed = false;
     }
 }

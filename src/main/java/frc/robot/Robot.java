@@ -25,11 +25,11 @@ public class Robot extends TimedRobot {
     SmartDashboard.putString("Drive Mode", m_robotContainer.drive.driveMode);
     SmartDashboard.putNumber("Drive Left Power", m_robotContainer.drive.leftDriveMaster.get());
     SmartDashboard.putNumber("Drive Right Power", m_robotContainer.drive.rightDriveMaster.get());
-    SmartDashboard.putNumber("Drive Left Encoder", m_robotContainer.drive.left1Encoder.getPosition());
-    SmartDashboard.putNumber("Drive Right Encoder", m_robotContainer.drive.right1Encoder.getPosition());   
-    SmartDashboard.putNumber("Gyro Heading", m_robotContainer.drive.NavX_getHeading());
-    SmartDashboard.putNumber("Gyro Angle", m_robotContainer.drive.NavX_getAngle());
-    SmartDashboard.putNumber("Gyro Rate", m_robotContainer.drive.NavX_getRate());
+    SmartDashboard.putNumber("Drive Left Encoder", m_robotContainer.drive.getLeftSideEncoderValue());
+    SmartDashboard.putNumber("Drive Right Encoder", m_robotContainer.drive.getRightSideEncoderValue());   
+    SmartDashboard.putNumber("Gyro Heading", m_robotContainer.drive.gyro.getHeading());
+    SmartDashboard.putNumber("Gyro Angle", m_robotContainer.drive.gyro.getAngle());
+    SmartDashboard.putNumber("Gyro Rate", m_robotContainer.drive.gyro.getRate());
   }
 
   @Override

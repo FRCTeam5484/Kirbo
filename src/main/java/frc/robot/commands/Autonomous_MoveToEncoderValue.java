@@ -29,6 +29,6 @@ public class Autonomous_MoveToEncoderValue extends CommandBase {
 
   @Override
   public boolean isFinished() {
-    return rotations < drive.left1Encoder.getPosition() ? true : false;
+    return rotations < drive.getAverageEncoderDistance() ? true : false;
   }
 }
