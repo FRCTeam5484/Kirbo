@@ -1,17 +1,18 @@
 package frc.robot.commands;
 
+
 import edu.wpi.first.math.controller.PIDController;
 import edu.wpi.first.wpilibj2.command.PIDCommand;
 import frc.robot.Constants.DriveSystem;
 import frc.robot.subsystems.subDriveTrain;
 
-public class Autonomous_TurnToAnglePID extends PIDCommand {
-  public Autonomous_TurnToAnglePID(subDriveTrain drive, double targetAngleDegrees) {
+public class Autonomous_MoveToEncoderTargetPID extends PIDCommand {
+  public Autonomous_MoveToEncoderTargetPID(subDriveTrain drive, double targetEncoderValue) {
     super(
       new PIDController(DriveSystem.PValue, DriveSystem.IValue, DriveSystem.DValue),
-      drive.gyro::getHeading,
-      targetAngleDegrees,
-      output -> drive.arcadeDrive(0, output),
+      drive::getAverageEncoderDistance,
+      targetEncoderValue,
+      output -> drive.arcadeDrive(output, 0),
       drive);
   }
 

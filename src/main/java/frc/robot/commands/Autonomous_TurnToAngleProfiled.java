@@ -10,12 +10,12 @@ public class Autonomous_TurnToAngleProfiled extends ProfiledPIDCommand {
   public Autonomous_TurnToAngleProfiled(subDriveTrain drive, double targetAngleDegrees) {
     super(
         new ProfiledPIDController(
-            DriveSystem.TurnP,
-            DriveSystem.TurnI,
-            DriveSystem.TurnD,
+            DriveSystem.PValue,
+            DriveSystem.IValue,
+            DriveSystem.DValue,
             new TrapezoidProfile.Constraints(
-                DriveSystem.MaxTurnRateDegPerS,
-                DriveSystem.MaxTurnAccelerationDegPerSSquared)),
+                DriveSystem.MaxTurnRateDegPerSec,
+                DriveSystem.MaxTurnAccelerationDegPerSecSquared)),
         drive.gyro::getHeading,
         targetAngleDegrees,
         (output, setpoint) -> drive.arcadeDrive(0, output),
@@ -23,7 +23,7 @@ public class Autonomous_TurnToAngleProfiled extends ProfiledPIDCommand {
 
     getController().enableContinuousInput(-180, 180);
     getController()
-        .setTolerance(DriveSystem.TurnToleranceDeg, DriveSystem.TurnRateToleranceDegPerS);
+        .setTolerance(DriveSystem.TurnToleranceDeg, DriveSystem.TurnRateToleranceDegPerSec);
   }
 
   @Override
