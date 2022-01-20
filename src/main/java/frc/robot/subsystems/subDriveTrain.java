@@ -74,29 +74,21 @@ public class subDriveTrain extends SubsystemBase {
     leftPIDController = leftDriveMaster.getPIDController();
     rightPIDController = rightDriveMaster.getPIDController();
 
-    kP = 0.1;
-    kI = 1e-4;
-    kD = 1;
-    kIz = 0;
-    kFF = .1;
-    kMaxOutput = .3;
-    kMinOutput = -.3;
+    leftPIDController.setP(DriveSystem.PValue);
+    leftPIDController.setI(DriveSystem.IValue);
+    leftPIDController.setD(DriveSystem.DValue);
+    leftPIDController.setIZone(DriveSystem.IZValue);
+    leftPIDController.setFF(DriveSystem.FFalue);
+    leftPIDController.setOutputRange(DriveSystem.AutoMinSpeed, DriveSystem.AutoMaxSpeed);
 
-    leftPIDController.setP(kP);
-    leftPIDController.setI(kI);
-    leftPIDController.setD(kD);
-    leftPIDController.setIZone(kIz);
-    leftPIDController.setFF(kFF);
-    leftPIDController.setOutputRange(kMinOutput, kMaxOutput);
-
-    rightPIDController.setP(kP);
-    rightPIDController.setI(kI);
-    rightPIDController.setD(kD);
-    rightPIDController.setIZone(kIz);
-    rightPIDController.setFF(kFF);
-    rightPIDController.setOutputRange(kMinOutput, kMaxOutput);
+    rightPIDController.setP(DriveSystem.PValue);
+    rightPIDController.setI(DriveSystem.IValue);
+    rightPIDController.setD(DriveSystem.DValue);
+    rightPIDController.setIZone(DriveSystem.IZValue);
+    rightPIDController.setFF(DriveSystem.FFalue);
+    rightPIDController.setOutputRange(DriveSystem.AutoMinSpeed, DriveSystem.AutoMaxSpeed);
   }
-  public void DriveStraightForRotations(final double rotations) {
+  public void DriveStraightUsingSparkMaxPID(final double rotations) {
     driveMode = "Auto";
     leftPIDController.setReference(rotations, CANSparkMax.ControlType.kPosition);
     rightPIDController.setReference(-rotations, CANSparkMax.ControlType.kPosition);
@@ -148,11 +140,11 @@ public class subDriveTrain extends SubsystemBase {
     right2Encoder.setPosition(0);
   }
 
-  public void DriveStraightUsingEncoders(){
+  public void DriveStraightUsingEncoders(double speed){
     driveMode = "Autonomous";
-    double error = left1Encoder.getPosition() - right1Encoder.getPosition();
-    double turnPower = .04 * -error;
-    driveTrain.arcadeDrive(DriveSystem.AutoMaxSpeed, turnPower, false);
+    double error = getLeftSideEncoderValue() - getRightSideEncoderValue();
+    double turnPower = DriveSystem.AutoTurnMaxSpeed * -error;
+    driveTrain.arcadeDrive(speed, turnPower, false);
   }
 
   public void SimpleMove(double speed){
@@ -160,10 +152,11 @@ public class subDriveTrain extends SubsystemBase {
     driveTrain.tankDrive(speed, -speed);
   }
 
-  public void GyroDriveStraight(double speed){
+  public void DriveStraightUsingGyro(double speed, int heading){
     driveMode = "Autonomous";
-    //double error = -riogyro.getTurnRate();
-    //driveTrain.tankDrive(.5 + 1 * error, .5 - 1 * error);
+    double error = gyro.getHeading() - heading;
+    double turnPower = DriveSystem.AutoTurnMaxSpeed * -error;
+    driveTrain.arcadeDrive(speed, turnPower);
   }
 
   public void GyroTurnTowardsAngle(double angle){

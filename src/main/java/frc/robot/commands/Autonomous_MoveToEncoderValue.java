@@ -19,7 +19,7 @@ public class Autonomous_MoveToEncoderValue extends CommandBase {
 
   @Override
   public void execute() {
-    drive.DriveStraightForRotations(rotations);
+    drive.DriveStraightUsingSparkMaxPID(rotations);
   }
 
   @Override
