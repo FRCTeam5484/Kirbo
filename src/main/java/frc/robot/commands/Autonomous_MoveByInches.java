@@ -5,19 +5,19 @@ import edu.wpi.first.wpilibj2.command.PIDCommand;
 import frc.robot.Constants.DriveSystem;
 import frc.robot.subsystems.subDriveTrain;
 
-public class Autonomous_TurnToAngle extends PIDCommand {
-  public Autonomous_TurnToAngle(subDriveTrain drive, double targetAngleDegrees) {
+public class Autonomous_MoveByInches extends PIDCommand {
+  public Autonomous_MoveByInches(subDriveTrain drive, double targetDistanceInInches) {
     super(
         new PIDController(
-          DriveSystem.TurnPValue, 
-          DriveSystem.TurnIValue, 
-          DriveSystem.TurnDValue),
+          DriveSystem.DrivePValue, 
+          DriveSystem.DriveIValue, 
+          DriveSystem.DriveDValue),
         // Close loop on heading
-        drive::GetHeading,
+        drive::getAverageEncoderDistance,
         // Set reference to target
-        targetAngleDegrees,
+        targetDistanceInInches * DriveSystem.EncoderTickToInch,
         // Pipe output to turn robot
-        output -> drive.autoTurn(output),
+        output -> drive.autoDrive(output),
         // Require the drive
         drive);
 
@@ -26,7 +26,7 @@ public class Autonomous_TurnToAngle extends PIDCommand {
     // Set the controller tolerance - the delta tolerance ensures the robot is stationary at the
     // setpoint before it is considered as having reached the reference
     getController()
-        .setTolerance(DriveSystem.TurnToleranceDeg, DriveSystem.TurnRateToleranceDegPerSec);
+       .setTolerance(DriveSystem.DriveToleranceDis);
   }
 
   @Override

@@ -74,16 +74,16 @@ public class subDriveTrain extends SubsystemBase {
     leftPIDController = leftDriveMaster.getPIDController();
     rightPIDController = rightDriveMaster.getPIDController();
 
-    leftPIDController.setP(DriveSystem.PValue);
-    leftPIDController.setI(DriveSystem.IValue);
-    leftPIDController.setD(DriveSystem.DValue);
+    leftPIDController.setP(DriveSystem.DrivePValue);
+    leftPIDController.setI(DriveSystem.DriveIValue);
+    leftPIDController.setD(DriveSystem.DriveDValue);
     leftPIDController.setIZone(DriveSystem.IZValue);
     leftPIDController.setFF(DriveSystem.FFalue);
     leftPIDController.setOutputRange(DriveSystem.AutoMinSpeed, DriveSystem.AutoMaxSpeed);
 
-    rightPIDController.setP(DriveSystem.PValue);
-    rightPIDController.setI(DriveSystem.IValue);
-    rightPIDController.setD(DriveSystem.DValue);
+    rightPIDController.setP(DriveSystem.DrivePValue);
+    rightPIDController.setI(DriveSystem.DriveIValue);
+    rightPIDController.setD(DriveSystem.DriveDValue);
     rightPIDController.setIZone(DriveSystem.IZValue);
     rightPIDController.setFF(DriveSystem.FFalue);
     rightPIDController.setOutputRange(DriveSystem.AutoMinSpeed, DriveSystem.AutoMaxSpeed);
@@ -127,7 +127,10 @@ public class subDriveTrain extends SubsystemBase {
     driveMode = "Auto";
     driveTrain.arcadeDrive(0, -rot);
   }
-
+  public void autoDrive(double speed) {
+    driveMode = "Auto";
+    driveTrain.arcadeDrive(-speed, 0);
+  }
   public void arcadeDrive(double fwd, double rot){
     driveMode = "TeleOp";
     driveTrain.arcadeDrive(fwd * DriveSystem.ManualMaxSpeed, -rot * DriveSystem.ManualMaxSpeed);
@@ -157,26 +160,7 @@ public class subDriveTrain extends SubsystemBase {
 
   public void SimpleMove(double speed){
     driveMode = "Autonomous";
-    driveTrain.tankDrive(speed, -speed);
-  }
-
-  public void DriveStraightUsingGyro(double speed, int heading){
-    driveMode = "Autonomous";
-    double error = gyro.getHeading() - heading;
-    double turnPower = DriveSystem.AutoTurnMaxSpeed * -error;
-    driveTrain.arcadeDrive(speed, turnPower);
-  }
-
-  public void GyroTurnTowardsAngle(double angle){
-    driveMode = "Autonomous";
-    if(angle > 0) {
-      double error = angle - gyro.getHeading();
-      driveTrain.tankDrive(1 * error, 1 * error);
-    }
-    else {
-      double error = Math.abs(angle) - gyro.getHeading();
-      driveTrain.tankDrive(-1 * error, -1 * error);
-    }
+    driveTrain.tankDrive(-speed, -speed);
   }
 
   public double getLeftSideEncoderValue(){

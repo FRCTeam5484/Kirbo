@@ -35,16 +35,24 @@ public final class Constants {
         public final static double AutoMaxSpeed = 0.3;
         public final static double AutoMinSpeed = -0.3;
         public final static double AutoTurnMaxSpeed = 0.5;
-        // PID Values
-        public static final double PValue = 0.01;
-        public static final double IValue = 0;
-        public static final double DValue = 0;
+        // PID Turn Values
+        public static final double TurnPValue = 0.039;
+        public static final double TurnIValue = 0;
+        public static final double TurnDValue = 0.0033;
+        public static final double TurnToleranceDeg = 3.5;
+        public static final double MaxTurnRateDegPerSec = 100;
+        public static final double TurnRateToleranceDegPerSec = 10;
+        // PID Drive Values
+        public static final double DrivePValue = 0.11;
+        public static final double DriveIValue = 0;
+        public static final double DriveDValue = 0;
+        public static final double DriveToleranceDis = 1;
+        
         public static final double IZValue = 0;
         public static final double FFalue = 0.1;
-        public static final double MaxTurnRateDegPerSec = 100;
+        
         public static final double MaxTurnAccelerationDegPerSecSquared = 300;
-        public static final double TurnToleranceDeg = 5;
-        public static final double TurnRateToleranceDegPerSec = 10;
         public static final boolean GyroReversed = false;
+        public static final double EncoderTickToInch = 0.48;
     }
 }
