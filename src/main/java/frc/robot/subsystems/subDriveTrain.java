@@ -123,14 +123,8 @@ public class subDriveTrain extends SubsystemBase {
     driveTrain.setDeadband(0.08);
   }
 
-  public void arcadeDrive() {
-    driveMode = "Autonomous";
-    driveTrain.arcadeDrive(.5, .9);
-  }
-
-  public void arcadeDrive(double speed, double rotation) {
-    driveMode = "Autonomous";
-    driveTrain.arcadeDrive(speed, rotation);
+  public void arcadeDrive(double fwd, double rot) {
+    driveTrain.arcadeDrive(fwd, -rot);
   }
 
   public void ResetEncoders(){
@@ -138,6 +132,14 @@ public class subDriveTrain extends SubsystemBase {
     left2Encoder.setPosition(0);
     right1Encoder.setPosition(0);
     right2Encoder.setPosition(0);
+  }
+  
+  public void ResetGyro(){
+    gyro.zeroHeading();
+  }
+
+  public double GetHeading(){
+    return gyro.getHeading();
   }
 
   public void DriveStraightUsingEncoders(double speed){
