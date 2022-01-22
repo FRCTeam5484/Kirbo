@@ -9,9 +9,9 @@ public final class Constants {
         
         // SparkMax
         private final static int DriveRightMaster = 1;
-        private final static int DriveRightSlave = 4;
-        private final static int DriveLeftMaster = 2;
-        private final static int DriveLeftSlave = 3;
+        private final static int DriveRightSlave = 2;
+        private final static int DriveLeftMaster = 3;
+        private final static int DriveLeftSlave = 4;
 
     }
 
@@ -28,7 +28,7 @@ public final class Constants {
         public final static int LeftMasterMotorId = HardwareId.DriveLeftMaster;
         public final static int LeftSlaveMotorId = HardwareId.DriveLeftSlave;
         // Inversion
-        public final static boolean LeftDriveInverted = false;
+        public final static boolean LeftDriveInverted = true;
         public final static boolean RightDriveInverted = false;
         // Speed
         public final static double ManualMaxSpeed = 0.7;

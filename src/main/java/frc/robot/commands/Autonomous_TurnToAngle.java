@@ -17,7 +17,7 @@ public class Autonomous_TurnToAngle extends PIDCommand {
         // Set reference to target
         targetAngleDegrees,
         // Pipe output to turn robot
-        output -> drive.arcadeDrive(0, output),
+        output -> drive.autoTurn(output),
         // Require the drive
         drive);
 

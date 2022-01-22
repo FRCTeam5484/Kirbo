@@ -40,6 +40,7 @@ public class RobotContainer {
   private void DriverOneFunctions() {
     // Default Commands
     drive.setDefaultCommand(new RunCommand(() -> drive.tankDrive(driverOne), drive));
+    //drive.setDefaultCommand(new RunCommand(() -> drive.arcadeDrive(driverOne.getLeftY(), driverOne.getRightX()), drive));
 
     new JoystickButton(driverOne, Button.kX.value)
         .whenPressed(new Autonomous_TurnToAngle(drive, -90).withTimeout(5));

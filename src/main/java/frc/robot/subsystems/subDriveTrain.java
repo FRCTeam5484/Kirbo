@@ -119,12 +119,18 @@ public class subDriveTrain extends SubsystemBase {
 
   public void tankDrive(final XboxController driver) {
     driveMode = "TeleOp";
-    driveTrain.tankDrive(-driver.getLeftY() * DriveSystem.ManualMaxSpeed, driver.getRightY() * DriveSystem.ManualMaxSpeed);
+    driveTrain.tankDrive(driver.getLeftY() * DriveSystem.ManualMaxSpeed, driver.getRightY() * DriveSystem.ManualMaxSpeed);
     driveTrain.setDeadband(0.08);
   }
 
-  public void arcadeDrive(double fwd, double rot) {
-    driveTrain.arcadeDrive(fwd, -rot);
+  public void autoTurn(double rot) {
+    driveMode = "Auto";
+    driveTrain.arcadeDrive(0, -rot);
+  }
+
+  public void arcadeDrive(double fwd, double rot){
+    driveMode = "TeleOp";
+    driveTrain.arcadeDrive(fwd * DriveSystem.ManualMaxSpeed, -rot * DriveSystem.ManualMaxSpeed);
   }
 
   public void ResetEncoders(){
