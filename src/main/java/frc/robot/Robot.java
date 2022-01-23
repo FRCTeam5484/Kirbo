@@ -29,7 +29,7 @@ public class Robot extends TimedRobot {
     SmartDashboard.putNumber("Drive Left Encoder", m_robotContainer.drive.getLeftSideEncoderValue());
     SmartDashboard.putNumber("Drive Right Encoder", m_robotContainer.drive.getRightSideEncoderValue());   
     SmartDashboard.putNumber("Drive Avg Encoder", m_robotContainer.drive.getAverageEncoderDistance());
-    SmartDashboard.putNumber("Gyro Heading", m_robotContainer.drive.gyro.getHeading());
+    SmartDashboard.putNumber("Gyro Heading", m_robotContainer.drive.getGyroHeading());
     SmartDashboard.putNumber("Encoder Inches", m_robotContainer.drive.getAverageEncoderDistance() / DriveSystem.EncoderTickToInch);
   }
 

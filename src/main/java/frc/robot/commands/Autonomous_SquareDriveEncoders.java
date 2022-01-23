@@ -15,23 +15,23 @@ public class Autonomous_SquareDriveEncoders extends SequentialCommandGroup {
   /** Creates a new Autonomous_SquareDriveEncoders. */
   public Autonomous_SquareDriveEncoders(subDriveTrain drive) {
     addCommands(
-      new InstantCommand(() -> drive.ResetEncoders()),
-      new InstantCommand(() -> drive.ResetGyro()),
+      new InstantCommand(() -> drive.setEncoders()),
+      new InstantCommand(() -> drive.setGyroHeading()),
       new Autonomous_MoveByInches(drive, 36).withTimeout(2),
       new Autonomous_TurnToAngle(drive, 90),
 
-      new InstantCommand(() -> drive.ResetEncoders()),
-      new InstantCommand(() -> drive.ResetGyro()),
+      new InstantCommand(() -> drive.setEncoders()),
+      new InstantCommand(() -> drive.setGyroHeading()),
       new Autonomous_MoveByInches(drive, 36).withTimeout(2),
       new Autonomous_TurnToAngle(drive, 90),
 
-      new InstantCommand(() -> drive.ResetEncoders()),
-      new InstantCommand(() -> drive.ResetGyro()),
+      new InstantCommand(() -> drive.setEncoders()),
+      new InstantCommand(() -> drive.setGyroHeading()),
       new Autonomous_MoveByInches(drive, 36).withTimeout(2),
       new Autonomous_TurnToAngle(drive, 90),
 
-      new InstantCommand(() -> drive.ResetEncoders()),
-      new InstantCommand(() -> drive.ResetGyro()),
+      new InstantCommand(() -> drive.setEncoders()),
+      new InstantCommand(() -> drive.setGyroHeading()),
       new Autonomous_MoveByInches(drive, 24).withTimeout(2),
       new Autonomous_TurnToAngle(drive, 90)
     );

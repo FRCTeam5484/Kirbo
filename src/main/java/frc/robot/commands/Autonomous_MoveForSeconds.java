@@ -1,11 +1,9 @@
-// Copyright (c) FIRST and other WPILib contributors.
-// Open Source Software; you can modify and/or share it under the terms of
-// the WPILib BSD license file in the root directory of this project.
-
 package frc.robot.commands;
 
+import edu.wpi.first.math.MathUtil;
 import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj2.command.CommandBase;
+import frc.robot.Constants.DriveSystem;
 import frc.robot.subsystems.subDriveTrain;
 
 public class Autonomous_MoveForSeconds extends CommandBase {
@@ -28,8 +26,7 @@ public class Autonomous_MoveForSeconds extends CommandBase {
 
   @Override
   public void execute() {
-    drive.SimpleMove(Speed);
-    //System.out.println("Auto: Move Sec " + Speed);
+    drive.autoDrive(MathUtil.clamp(Speed, DriveSystem.AutoMinSpeed, DriveSystem.AutoMaxSpeed));
   }
 
   @Override

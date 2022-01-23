@@ -31,7 +31,7 @@ public final class Constants {
         public final static boolean LeftDriveInverted = true;
         public final static boolean RightDriveInverted = false;
         // Speed
-        public final static double ManualMaxSpeed = 0.7;
+        public final static double ManualSpeedFactor = 0.7;
         public final static double AutoMaxSpeed = 0.3;
         public final static double AutoMinSpeed = -0.3;
         public final static double AutoTurnMaxSpeed = 0.5;
