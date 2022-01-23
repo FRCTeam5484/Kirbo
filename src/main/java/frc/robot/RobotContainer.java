@@ -53,7 +53,7 @@ public class RobotContainer {
       .whenPressed(new Autonomous_TurnToAngle(drive, 90).withTimeout(5));
 
     new JoystickButton(driverOne, Button.kY.value)
-      .whenPressed(new InstantCommand(() -> drive.setGyroHeading()));
+      .whenPressed(new InstantCommand(() -> drive.setGyroZeroYaw()));
 
     new JoystickButton(driverOne, Button.kA.value)
       .whenPressed(new InstantCommand(() -> drive.setEncoders()));

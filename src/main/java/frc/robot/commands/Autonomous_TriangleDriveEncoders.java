@@ -8,22 +8,22 @@ public class Autonomous_TriangleDriveEncoders extends SequentialCommandGroup {
   public Autonomous_TriangleDriveEncoders(subDriveTrain drive) {
     addCommands(
       new InstantCommand(() -> drive.setEncoders()),
-      new InstantCommand(() -> drive.setGyroHeading()),
+      new InstantCommand(() -> drive.setGyroZeroYaw()),
       new Autonomous_MoveByInches(drive, 36).withTimeout(2),
       new Autonomous_TurnToAngle(drive, 135),
 
       new InstantCommand(() -> drive.setEncoders()),
-      new InstantCommand(() -> drive.setGyroHeading()),
+      new InstantCommand(() -> drive.setGyroZeroYaw()),
       new Autonomous_MoveByInches(drive, 36).withTimeout(2),
       new Autonomous_TurnToAngle(drive, 135),
 
       new InstantCommand(() -> drive.setEncoders()),
-      new InstantCommand(() -> drive.setGyroHeading()),
+      new InstantCommand(() -> drive.setGyroZeroYaw()),
       new Autonomous_MoveByInches(drive, 36).withTimeout(2),
       new Autonomous_TurnToAngle(drive, 135),
 
       new InstantCommand(() -> drive.setEncoders()),
-      new InstantCommand(() -> drive.setGyroHeading()),
+      new InstantCommand(() -> drive.setGyroZeroYaw()),
       new Autonomous_TurnToAngle(drive, 135)
 
     );

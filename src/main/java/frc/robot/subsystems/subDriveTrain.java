@@ -101,7 +101,7 @@ public class subDriveTrain extends SubsystemBase {
   //#endregion
 
   //#region Gryo Methods
-  public void setGyroHeading(){
+  public void setGyroZeroYaw(){
     gyro.zeroYaw();
   }
 
