@@ -32,18 +32,18 @@ public final class Constants {
         public final static boolean RightDriveInverted = false;
         // Speed
         public final static double ManualSpeedFactor = 0.7;
-        public final static double AutoMaxSpeed = 0.3;
-        public final static double AutoMinSpeed = -0.3;
-        public final static double AutoTurnMaxSpeed = 0.5;
+        public final static double AutoMaxSpeed = 0.70;
+        public final static double AutoMinSpeed = -0.40;
+        public final static double AutoTurnMaxSpeed = 0.70;
         // PID Turn Values
-        public static final double TurnPValue = 0.039;
+        public static final double TurnPValue = 0.06;
         public static final double TurnIValue = 0;
         public static final double TurnDValue = 0.0033;
         public static final double TurnToleranceDeg = 3.5;
         public static final double MaxTurnRateDegPerSec = 100;
         public static final double TurnRateToleranceDegPerSec = 10;
         // PID Drive Values
-        public static final double DrivePValue = 0.11;
+        public static final double DrivePValue = 0.20;
         public static final double DriveIValue = 0;
         public static final double DriveDValue = 0;
         public static final double DriveToleranceDis = 1;

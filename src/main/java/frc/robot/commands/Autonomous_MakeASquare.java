@@ -7,13 +7,13 @@ import frc.robot.subsystems.subDriveTrain;
 public class Autonomous_MakeASquare extends SequentialCommandGroup {
   public Autonomous_MakeASquare(subDriveTrain drive) {
     addCommands(
-      new InstantCommand(() -> drive.setGyroHeading()),
+      new InstantCommand(() -> drive.getGyroHeading()),
       new Autonomous_MoveForSeconds(drive, 2, .4),
       new Autonomous_TurnToAngle(drive, 90),
-      new InstantCommand(() -> drive.setGyroHeading()),
+      new InstantCommand(() -> drive.getGyroHeading()),
       new Autonomous_MoveForSeconds(drive, 2, .4),
       new Autonomous_TurnToAngle(drive, 90),
-      new InstantCommand(() -> drive.setGyroHeading()),
+      new InstantCommand(() -> drive.getGyroHeading()),
       new Autonomous_MoveForSeconds(drive, 2, .4),
       new Autonomous_TurnToAngle(drive, 90),
       new Autonomous_MoveForSeconds(drive, 2, .4)

@@ -5,6 +5,7 @@ import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.XboxController.Button;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import frc.robot.commands.Autonomous_AutoTest;
 import frc.robot.commands.Autonomous_MakeASquare;
 import frc.robot.commands.Autonomous_MoveForSeconds;
 import frc.robot.commands.Autonomous_SquareDriveEncoders;
@@ -39,6 +40,8 @@ public class RobotContainer {
 
     autoChooser.addOption("Make a Square", new Autonomous_MakeASquare(drive));
     autoChooser.addOption("Make Encoder Square", new Autonomous_SquareDriveEncoders(drive));
+
+    autoChooser.addOption("Auto grab ball Move", new Autonomous_AutoTest(drive));
     SmartDashboard.putData("Autonomous", autoChooser);
   }
 
