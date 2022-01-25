@@ -19,17 +19,18 @@ public class Autonomous_AutoTest extends SequentialCommandGroup {
       new InstantCommand(() -> drive.setEncoders()),
       new InstantCommand(() -> drive.getGyroHeading()),
       new Autonomous_MoveByInches(drive, 100),
-      new InstantCommand(() -> drive.getGyroHeading()),
-      new Autonomous_TurnToAngle(drive, 180),
+      
       //Go to shoot ball
       new InstantCommand(() -> drive.setEncoders()),
-      new Autonomous_MoveByInches(drive, 105),
+      new Autonomous_MoveByInches(drive, -90),
+      new Autonomous_WaitForSec(drive, 5),
       //shoot bang bang
       //Go to third ball
       new InstantCommand(() -> drive.setEncoders()),
+      new Autonomous_MoveByInches(drive, 10),
       new InstantCommand(() -> drive.getGyroHeading()),
-      new Autonomous_TurnToAngle(drive, 106),
-      new Autonomous_MoveByInches(drive, 150)
+      new Autonomous_TurnToAngle(drive, -1),
+      new Autonomous_MoveByInches(drive, 215)
       //suck suck ball
     );
   }

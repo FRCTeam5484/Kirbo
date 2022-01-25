@@ -39,7 +39,7 @@ public class RobotContainer {
 
   private void AddAutoCommands() {
     autoChooser.setDefaultOption("Move For Seconds", new Autonomous_MoveForSeconds(drive, 4, 0.4));
-    autoChooser.addOption("Turn to Angle", new Autonomous_TurnToAngle(drive, 90));
+    autoChooser.addOption("Turn to Angle", new Autonomous_TurnToAngle(drive, 179));
 
     autoChooser.addOption("Make a Square", new Autonomous_MakeASquare(drive));
     autoChooser.addOption("Make Encoder Square", new Autonomous_SquareDriveEncoders(drive));

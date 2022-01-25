@@ -82,6 +82,7 @@ public class subDriveTrain extends SubsystemBase implements Loggable {
   public void autoTurn(double rot) {
     driveMode = "Auto";
     driveTrain.arcadeDrive(0, MathUtil.clamp(-rot, DriveSystem.AutoMinSpeed, DriveSystem.AutoMaxSpeed));
+    System.out.println(MathUtil.clamp(-rot, DriveSystem.AutoMinSpeed, DriveSystem.AutoMaxSpeed)  + " " + getGyroHeading());
   }
 
   public void autoDrive(double speed) {
@@ -126,11 +127,11 @@ public class subDriveTrain extends SubsystemBase implements Loggable {
   }
 
   public double getLeftSideEncoderValue(){
-    return Math.abs(leftEncoder.getPosition());
+    return -leftEncoder.getPosition();
   }
 
   public double getRightSideEncoderValue(){
-    return Math.abs(rightEncoder.getPosition());
+    return -rightEncoder.getPosition();
   }
 
   public double getAverageEncoderDistance(){
