@@ -12,6 +12,7 @@ import frc.robot.commands.Autonomous_SquareDriveEncoders;
 import frc.robot.commands.Autonomous_TriangleDriveEncoders;
 import frc.robot.commands.Autonomous_TurnToAngle;
 import frc.robot.subsystems.subDriveTrain;
+import io.github.oblarg.oblog.annotations.Log;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.InstantCommand;
 import edu.wpi.first.wpilibj2.command.RunCommand;
@@ -19,6 +20,7 @@ import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 
 
 public class RobotContainer {
+
   SendableChooser<Command> autoChooser = new SendableChooser<>();
 
   // Controllers
@@ -26,6 +28,7 @@ public class RobotContainer {
   public final XboxController driverTwo = new XboxController(Constants.DriveControllers.DriverTwo);
   public final Joystick buttonBox = new Joystick(Constants.DriveControllers.ButtonBox);
 
+  @Log
   // SubSystems
   public final subDriveTrain drive = new subDriveTrain();
 

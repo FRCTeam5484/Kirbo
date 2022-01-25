@@ -7,20 +7,29 @@ import com.revrobotics.CANSparkMax.IdleMode;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 
 import frc.robot.Constants.DriveSystem;
+import io.github.oblarg.oblog.Loggable;
+import io.github.oblarg.oblog.annotations.Log;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import edu.wpi.first.math.MathUtil;
 import edu.wpi.first.wpilibj.SPI;
 
-public class subDriveTrain extends SubsystemBase {
+public class subDriveTrain extends SubsystemBase implements Loggable {
+  @Log.MotorController(name = "Left Master Motor")
   public CANSparkMax leftDriveMaster = new CANSparkMax(DriveSystem.LeftMasterMotorId, MotorType.kBrushless);
+  @Log.MotorController(name = "Left Follower Motor")
   public CANSparkMax leftDriveSlave = new CANSparkMax(DriveSystem.LeftSlaveMotorId, MotorType.kBrushless);
+  @Log.MotorController(name = "Right Master Motor")
   public CANSparkMax rightDriveMaster = new CANSparkMax(DriveSystem.RightMasterMotorId, MotorType.kBrushless);
+  @Log.MotorController(name = "Right Follower Motor")
   public CANSparkMax rightDriveSlave = new CANSparkMax(DriveSystem.RightSlaveMotorId, MotorType.kBrushless);
+  @Log.DifferentialDrive(name = "Drive")
   public DifferentialDrive driveTrain = new DifferentialDrive(leftDriveMaster, rightDriveMaster);
 
+  @Log.Encoder(name = "Left Master Encoder")
   private RelativeEncoder leftEncoder = leftDriveMaster.getEncoder();
+  @Log.Encoder(name = "Right Master Encoder")
   private RelativeEncoder rightEncoder = rightDriveMaster.getEncoder();
   public String driveMode = "TeleOp";
 
